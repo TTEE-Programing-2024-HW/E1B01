@@ -29,7 +29,7 @@ int main(){                                                               //畫圖
 	system("pause");                        /*螢幕暫停*/
     system("cls");                           /*清除畫面*/
     
-    int passcode,i,a;
+    int passcode,i,j;
     printf("請輸入密碼:");
     for(i=3; i>0; i--){
     	fflush(stdin);							/*清空input buffer*/
@@ -43,9 +43,9 @@ int main(){                                                               //畫圖
 		}else if(passcode == 2024){
 			system("pause");                        /*螢幕暫停*/
     		system("cls");                          /*清除畫面*/
-			int z=0,b,num;
+			int b,num;
 			char ch;                           
-    		for(a=0; 1; a++){
+    		for(j=0; 1; j++){
     				printf("                     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
     				printf("                                                                                       \n");
     				printf("                     |                      a. 畫出直角三角形                         |\n");
@@ -57,16 +57,18 @@ int main(){                                                               //畫圖
     				printf("                     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
     				printf("\n");
     				printf("請輸入:");
+    				fflush(stdin);							/*清空input buffer*/
     				scanf("%c",&ch);
     				if(ch == 'a' || ch == 'A'){
     					
 					}else if(ch == 'b' || ch == 'B'){
 						int f,g,c;
+						system("pause");                        /*螢幕暫停*/
+    					system("cls");                          /*清除畫面*/
     					printf("請輸入1~9的整數:");
     					for(c=0;1;c++){
     						scanf("%d",&num);
-    						system("pause");                        /*螢幕暫停*/
-    						system("cls");                          /*清除畫面*/
+ 
     						if(num>=1 && num<=9){
     							for(f=1;f<=num;f++){
     								for(g=1;g<10;g++){
@@ -81,6 +83,10 @@ int main(){                                                               //畫圖
 						}
 					}else if(ch == 'c' || ch == 'C'){
     					
+					}else{
+						printf("請重新輸入\n");
+						system("pause");                        /*螢幕暫停*/
+    					system("cls");                          /*清除畫面*/
 					}
     					
     		}

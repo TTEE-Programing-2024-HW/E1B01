@@ -82,7 +82,16 @@ int main(){                                                               //畫圖
 							}
 						}
 					}else if(ch == 'c' || ch == 'C'){
-    					
+						char comfirm;
+						int p=0;
+    					printf("Continue?(y/n) ");
+    					while(p=0){
+    						fflush(stdin);							/*清空input buffer*/
+    						scanf("%c",&comfirm);
+    						if(comfirm == 'y' || comfirm == 'Y'){
+    							p=1;
+							}
+						}
 					}else{
 						printf("請重新輸入\n");
 						system("pause");                        /*螢幕暫停*/

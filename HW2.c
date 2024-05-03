@@ -1,14 +1,16 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void triangle(char put){
-	int i,j,k;
-	for(i=0;i<=15;i++){
-		for(j=0;j<15-i;j++){
+void triangle(char zi){
+	int to=0;
+	char i,j,k;
+	for(i='a';i<=zi;i++){
+		for(j=zi-to;j>='a';j--){
 			printf(" ");
-		}for(k=0;k<=i;k++){
-			printf("%c",'put'-i);
-		}printf("\n");
+		}for(k=zi-to;k<=zi;k++){
+			printf("%c",k);
+		}to++;
+		printf("\n");
 	}
 }
 int main(){                                                               //畫圖 
@@ -82,6 +84,8 @@ int main(){                                                               //畫圖
     							scanf("%c",&input);
     							if(input >= 'a' && input <= 'n'){
     								triangle(input);
+    								system("pause");                        /*螢幕暫停*/
+    								system("cls");                          /*清除畫面*/
     								break;
 								}else{
 									system("pause");                        /*螢幕暫停*/

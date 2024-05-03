@@ -69,17 +69,22 @@ int main(){                                                               //畫圖
     						system("cls");                          /*清除畫面*/
     						printf("請輸入1~9的整數:");
     						for(c=0;1;c++){
+    							fflush(stdin);							/*清空input buffer*/
     							scanf("%d",&num);
  
     							if(num>=1 && num<=9){
     								for(f=1;f<=num;f++){
-    									for(g=1;g<10;g++){
-    										printf("%dx%d=%d ",f,g,f*g);
+    									for(g=1;g<=num;g++){
+    										if(f==g){
+    											printf("%dx%d=%d ",f,g,f*g);
+    										}
 										}printf("\n");
 									}system("pause");                        /*螢幕暫停*/
     								system("cls");                          /*清除畫面*/
     								break;
 								}else{
+									system("pause");                        /*螢幕暫停*/
+    								system("cls");                          /*清除畫面*/
 									printf("請重新輸入1~9的整數:");
 								}
 							}
@@ -92,7 +97,7 @@ int main(){                                                               //畫圖
     							if(comfirm == 'y' || comfirm == 'Y'){
     								system("pause");                        /*螢幕暫停*/
     								system("cls");                          /*清除畫面*/
-    								p=1;
+    								break;
 								}else if(comfirm == 'n' || comfirm == 'N'){
     								p=2;
 								}else{

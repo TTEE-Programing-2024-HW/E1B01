@@ -1,6 +1,17 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+void triangle(char a){
+	int i,j,k;
+	for(i=0;i<='a';i++){
+		for(j=1;j<'a';j++){
+			printf(" ");
+		}for(k='a'-i;k<='a';k++){
+			printf("%c",k);
+		}printf("\n");
+	}
+}
+
 int main(){                                                               //畫圖 
     printf("              *************************************************************\n");
 	printf("              *************************************************************\n");
@@ -62,7 +73,22 @@ int main(){                                                               //畫圖
     					fflush(stdin);							/*清空input buffer*/
     					scanf("%c",&ch);
     					if(ch == 'a' || ch == 'A'){
-    					
+    						system("pause");                        /*螢幕暫停*/
+    						system("cls");                          /*清除畫面*/
+    						int r;
+    						printf("請輸入字元:");
+    						for(r=0;1;r++){
+    							char input;
+    							scanf("%c",&input);
+    							if(input >= 'a' && input <= 'n'){
+    								triangle(input);
+    								break;
+								}else{
+									system("pause");                        /*螢幕暫停*/
+    								system("cls");                          /*清除畫面*/
+									printf("請重新輸入字元:");
+								}
+    						}
 						}else if(ch == 'b' || ch == 'B'){
 							int f,g,c;
 							system("pause");                        /*螢幕暫停*/

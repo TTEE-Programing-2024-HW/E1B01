@@ -2,12 +2,12 @@
 #include <stdlib.h>
 
 void triangle(char put){
-	char i,j,k;
-	for(i='a';i<='put';i++){
-		for(j='a';j<'put';j++){
+	int i,j,k;
+	for(i=0;i<=15;i++){
+		for(j=0;j<15-i;j++){
 			printf(" ");
-		}for(k='put'-i;k<='put';k++){
-			printf("%c",k);
+		}for(k=0;k<=i;k++){
+			printf("%c",'put'-i);
 		}printf("\n");
 	}
 }

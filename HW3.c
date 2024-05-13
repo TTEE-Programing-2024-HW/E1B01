@@ -33,33 +33,48 @@ void printSeats() {       //print seats
 void auto_choose_seat(int n){
     
 
-        // 遍歷座位表，尋找可用的座位
         while(1){
 		
         	int row = rand() % size;
     		int col = rand() % size;
-                // 檢查是否有連續的空座位
+                // find empty seats
                 int k;
-                for (k = 0; k < n; k++) {
+                if(n >=1 && n<=4){
+                	for (k = 0; k < n; k++) {
                 	
                     if (seats[row][col + k] != '-' ||  (col + k) >= size) {
                         break;
                     }
                 }
 
-                // 如果找到了連續的空座位，就標記為'@'，並返回
-                if (k == n) {
-                    for (k = 0; k < n; k++) {
-                        seats[row][col + k] = '@';
-                    }
-                    printf("系統已為您安排座位：\n");
-                    printSeats();
-                    for (k = 0; k < n; k++) {
-                        seats[row][col + k] = '*';
-                    }
-                    break;
-                    
+                // find empty seats,and mark it @,and return
+                	if (k == n) {
+                    	for (k = 0; k < n; k++) {
+                    	    seats[row][col + k] = '@';
+                    	}
+                    	printf("System has arranged your seats：\n");
+                    	printSeats();
+                    	for (k = 0; k < n; k++) {
+                    	    seats[row][col + k] = '*';
+                    	}
+                    	break;
+                	}
+				}else if(n == 4){
+					if (seats[row][col] == '-' && seats[row][col + 1] == '-' && seats[row + 1][col] == '-' && seats[row + 1][col + 1] == '-') {
+                    	seats[row][col] = '@';
+                    	seats[row][col + 1] = '@';
+                    	seats[row + 1][col] = '@';
+                    	seats[row + 1][col + 1] = '@';
+                    	printf("System has arranged your seats：\n");
+                    	printSeats();
+                    	seats[row][col] = '*';
+                    	seats[row][col + 1] = '*';
+                    	seats[row + 1][col] = '*';
+                    	seats[row + 1][col + 1] = '*';
+                    	return;
                 }
+				}
+                
         	}return;
 }
 

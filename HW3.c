@@ -42,7 +42,7 @@ void auto_choose_seat(int n){
                 int k;
                 for (k = 0; k < n; k++) {
                 	
-                    if (seats[row][col + k] != '-') {
+                    if (seats[row][col + k] != '-' ||  (col + k) >= size) {
                         break;
                     }
                 }
@@ -54,50 +54,16 @@ void auto_choose_seat(int n){
                     }
                     printf("系統已為您安排座位：\n");
                     printSeats();
-                    return;
+                    for (k = 0; k < n; k++) {
+                        seats[row][col + k] = '*';
+                    }
+                    break;
+                    
                 }
-        	}
-        printf("抱歉，沒有找到足夠的連續座位。\n");
+        	}return;
 }
 
-void arrangeSeats() {
-    int numSeats;
-    printf("需要幾個座位（1~4）: ");
-    scanf("%d", &numSeats);
 
-    if (numSeats >= 1 && numSeats <= 4) {
-        // 遍歷座位表，尋找可用的座位
-        while(1){
-		
-        	int row = rand() % size;
-    		int col = rand() % size;
-                // 檢查是否有連續的空座位
-                int k;
-                for (k = 0; k < numSeats; k++) {
-                	
-                    if (seats[row][col + k] != '-') {
-                        break;
-                    }
-                }
-
-                // 如果找到了連續的空座位，就標記為'@'，並返回
-                if (k == numSeats) {
-                    for (k = 0; k < numSeats; k++) {
-                        seats[row][col + k] = '@';
-                    }
-                    printf("系統已為您安排座位：\n");
-                    printSeats();
-                    return;
-                }
-        	}
-            
-        
-
-        printf("抱歉，沒有找到足夠的連續座位。\n");
-    } else {
-        printf("錯誤：座位數量必須在1到4之間。\n");
-    }
-}
 
 
 int main() {
@@ -169,12 +135,13 @@ int main() {
                 break;
             case 'b':
             	for(;;){
-            		int num;
+            		int num=5;
             		printf("please input 1~4:");
             		fflush(stdin);             	/*clear input buffer*/
             		scanf("%d",&num);
             		if(num<=4 && num>=1){
             			auto_choose_seat(num);
+            			break;
 					}
 				}
                 break;

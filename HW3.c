@@ -86,9 +86,7 @@ void auto_choose_seat(int n){
                     	}
                     	printf("System has arranged your seats¡G\n");
                     	printSeats();
-                    	for (k = 0; k < n; k++) {
-                    	    seats[row][col + k] = '*';
-                    	}char sat;
+                    	char sat;
                     	printf("Satisfied? (y/n)");
                     	while(1){                                 //ask Satisfied?
 							fflush(stdin);							/*clear input buffer*/
@@ -109,9 +107,8 @@ void auto_choose_seat(int n){
 							}
                     	}
                 	}
-				} 
-                
-        	}return;
+				}        
+        }return;
 }
 
 
@@ -193,7 +190,7 @@ int main() {
             		fflush(stdin);             	/*clear input buffer*/
             		scanf("%d",&num);
             		if(num<=4 && num>=1){
-            			auto_choose_seat(num);
+            			auto_choose_seat(num);    //call function auto_choose_seat
             			break;
 					}
 				}

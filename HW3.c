@@ -31,25 +31,74 @@ void printSeats() {       //print seats
     system("cls");                           /*clear the screen*/
 }
 void auto_choose_seat(int n){
-	
-    int i,j,a=0;
-    while(1){
-    	int row = rand() % size;
-    	int col = rand() % size;
-    	if(seats[row][col] != '*'){
-    		for(i=0;i<n;i++){
-    			if(seats[row][col+i] != '*'){
-    				a++;
-    				if(a==n){
-    					for(j=0;j<n;j++){
-    						seats[row][col+j]='@';
-						}printSeats();
-					}
-				}a=0;
-			}
-		}
-	}
+    
+
+        // 遍歷座位表，尋找可用的座位
+        while(1){
+		
+        	int row = rand() % size;
+    		int col = rand() % size;
+                // 檢查是否有連續的空座位
+                int k;
+                for (k = 0; k < n; k++) {
+                	
+                    if (seats[row][col + k] != '-') {
+                        break;
+                    }
+                }
+
+                // 如果找到了連續的空座位，就標記為'@'，並返回
+                if (k == n) {
+                    for (k = 0; k < n; k++) {
+                        seats[row][col + k] = '@';
+                    }
+                    printf("系統已為您安排座位：\n");
+                    printSeats();
+                    return;
+                }
+        	}
+        printf("抱歉，沒有找到足夠的連續座位。\n");
 }
+
+void arrangeSeats() {
+    int numSeats;
+    printf("需要幾個座位（1~4）: ");
+    scanf("%d", &numSeats);
+
+    if (numSeats >= 1 && numSeats <= 4) {
+        // 遍歷座位表，尋找可用的座位
+        while(1){
+		
+        	int row = rand() % size;
+    		int col = rand() % size;
+                // 檢查是否有連續的空座位
+                int k;
+                for (k = 0; k < numSeats; k++) {
+                	
+                    if (seats[row][col + k] != '-') {
+                        break;
+                    }
+                }
+
+                // 如果找到了連續的空座位，就標記為'@'，並返回
+                if (k == numSeats) {
+                    for (k = 0; k < numSeats; k++) {
+                        seats[row][col + k] = '@';
+                    }
+                    printf("系統已為您安排座位：\n");
+                    printSeats();
+                    return;
+                }
+        	}
+            
+        
+
+        printf("抱歉，沒有找到足夠的連續座位。\n");
+    } else {
+        printf("錯誤：座位數量必須在1到4之間。\n");
+    }
+}
+
 
 int main() {
 	srand(time(0));       //design random number generate

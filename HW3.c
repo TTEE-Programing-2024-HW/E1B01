@@ -30,7 +30,26 @@ void printSeats() {       //print seats
     }system("pause");                        /*pause the screen*/
     system("cls");                           /*clear the screen*/
 }
-
+void auto_choose_seat(int n){
+	
+    int i,j,a=0;
+    while(1){
+    	int row = rand() % size;
+    	int col = rand() % size;
+    	if(seats[row][col] != '*'){
+    		for(i=0;i<n;i++){
+    			if(seats[row][col+i] != '*'){
+    				a++;
+    				if(a==n){
+    					for(j=0;j<n;j++){
+    						seats[row][col+j]='@';
+						}printSeats();
+					}
+				}a=0;
+			}
+		}
+	}
+}
 
 int main() {
 	srand(time(0));       //design random number generate
@@ -90,6 +109,7 @@ int main() {
         
         char choice;
         printf("please input letter:");
+        fflush(stdin);							/*clear input buffer*/
         scanf(" %c", &choice);
         system("pause");                        /*pause the screen*/
     	system("cls");                           /*clear the screen*/
@@ -99,22 +119,37 @@ int main() {
             	printSeats();          //call function printSeats
                 break;
             case 'b':
+            	for(;;){
+            		int num;
+            		printf("please input 1~4:");
+            		fflush(stdin);             	/*clear input buffer*/
+            		scanf("%d",&num);
+            		if(num<=4 && num>=1){
+            			auto_choose_seat(num);
+					}
+				}
                 break;
             case 'c':
                 break;
             case 'd':
-                printf("Continue? (y/n): ");
-                char _continue;
-                scanf(" %c", &_continue);
-                if (_continue == 'y') {
-                    system("pause");                        /*pause the screen*/
-    				system("cls");                           /*clear the screen*/
-                }
-                if (_continue == 'n') {
-                    return 0;
-                }
+            	printf("Continue? (y/n): ");
+            	while(1){
+
+                	char _continue;
+               		fflush(stdin);							/*clear input buffer*/
+                	scanf("%c", &_continue);
+               		if (_continue == 'y') {
+                    	system("pause");                        /*pause the screen*/
+    					system("cls");                           /*clear the screen*/
+    					break;
+                	}else if (_continue == 'n') {
+                	    return 0;
+                	}else{
+                		printf("Continue? (y/n): ");
+					}
+            	}
                 break;
-            default:
+            default:                                   //detect whether inputing correct
                 printf("¿ù»~°T®§\n");
                 system("pause");                        /*pause the screen*/
     			system("cls");                           /*clear the screen*/

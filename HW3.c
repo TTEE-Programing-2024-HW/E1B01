@@ -34,15 +34,47 @@ void auto_choose_seat(int n){
     
 
         while(1){
-		
+		   //generate random number
         	int row = rand() % size;
     		int col = rand() % size;
                 // find empty seats
                 int k;
+                if(n == 4){                       //choose seats,and mark it @
+					if (seats[row][col] == '-' && seats[row][col + 1] == '-' && seats[row + 1][col] == '-' && seats[row + 1][col + 1] == '-' && (col + 1) <= size) {
+                    	seats[row][col] = '@';
+                    	seats[row][col + 1] = '@';
+                    	seats[row + 1][col] = '@';
+                    	seats[row + 1][col + 1] = '@';
+                    	printf("System has arranged your seats¡G\n");
+                    	printSeats();
+                    	char sat;
+                    	printf("Satisfied? (y/n)");
+                    	while(1){                                 //ask Satisfied?
+							fflush(stdin);							/*clear input buffer*/
+                    		scanf("%c",&sat);
+
+                    		if (sat == 'y') {              //if y ,then return
+                    			seats[row][col] = '*';
+                    			seats[row][col + 1] = '*';
+                    			seats[row + 1][col] = '*';
+                    			seats[row + 1][col + 1] = '*';
+                    			return;
+                			}else if (sat == 'n') {       //if n ,then rerun the function
+                			    seats[row][col] = '-';
+                    			seats[row][col + 1] = '-';
+                    			seats[row + 1][col] = '-';
+                    			seats[row + 1][col + 1] = '-';
+                    			break;
+                			}else{
+                				printf("Satisfied? (y/n): ");
+							}
+                    	}
+                	}
+				}
                 if(n >=1 && n<=4){
                 	for (k = 0; k < n; k++) {
                 	
-                    if (seats[row][col + k] != '-' ||  (col + k) >= size) {
+                    if (seats[row][col + k] != '-' ||  (col + k) >= size) {  //find empty seats
                         break;
                     }
                 }
@@ -56,24 +88,28 @@ void auto_choose_seat(int n){
                     	printSeats();
                     	for (k = 0; k < n; k++) {
                     	    seats[row][col + k] = '*';
+                    	}char sat;
+                    	printf("Satisfied? (y/n)");
+                    	while(1){                                 //ask Satisfied?
+							fflush(stdin);							/*clear input buffer*/
+                    		scanf("%c",&sat);
+
+                    		if (sat == 'y') {                      //if y ,then return
+                    			for (k = 0; k < n; k++) {
+                    	    		seats[row][col + k] = '*';
+                    			}
+                    			return;
+                			}else if (sat == 'n') {                //if n ,then rerun the function
+                			    for (k = 0; k < n; k++) {
+                    	    		seats[row][col + k] = '-';
+                    			}
+                    			break;
+                			}else{
+                				printf("Satisfied? (y/n): ");
+							}
                     	}
-                    	break;
                 	}
-				}else if(n == 4){
-					if (seats[row][col] == '-' && seats[row][col + 1] == '-' && seats[row + 1][col] == '-' && seats[row + 1][col + 1] == '-') {
-                    	seats[row][col] = '@';
-                    	seats[row][col + 1] = '@';
-                    	seats[row + 1][col] = '@';
-                    	seats[row + 1][col + 1] = '@';
-                    	printf("System has arranged your seats¡G\n");
-                    	printSeats();
-                    	seats[row][col] = '*';
-                    	seats[row][col + 1] = '*';
-                    	seats[row + 1][col] = '*';
-                    	seats[row + 1][col + 1] = '*';
-                    	return;
-                }
-				}
+				} 
                 
         	}return;
 }

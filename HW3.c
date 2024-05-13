@@ -40,7 +40,7 @@ void auto_choose_seat(int n){
                 // find empty seats
                 int k;
                 if(n == 4){                       //choose seats,and mark it @
-					if (seats[row][col] == '-' && seats[row][col + 1] == '-' && seats[row + 1][col] == '-' && seats[row + 1][col + 1] == '-' && (col + 1) <= size) {
+					if (seats[row][col] == '-' && seats[row][col + 1] == '-' && seats[row + 1][col] == '-' && seats[row + 1][col + 1] == '-' && (col + 1) < size) {
                     	seats[row][col] = '@';
                     	seats[row][col + 1] = '@';
                     	seats[row + 1][col] = '@';
@@ -166,6 +166,8 @@ int main() {
         }
     }for(;;){
     //menu
+    	system("pause");                        /*pause the screen*/
+    	system("cls");                           /*clear the screen*/
     	printf("----------[BookingSystem]---------------\n");
         printf("|       a. Available seats             |\n");
         printf("|       b. Arrange for you             |\n");

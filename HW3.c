@@ -71,7 +71,7 @@ void auto_choose_seat(int n){
                     	}
                 	}
 				}
-                if(n >=1 && n<=4){
+                if(n >= 1 && n <= 4){
                 	for (k = 0; k < n; k++) {
                 	
                     if (seats[row][col + k] != '-' ||  (col + k) >= size) {  //find empty seats
@@ -111,7 +111,36 @@ void auto_choose_seat(int n){
         }return;
 }
 
-
+void self_choose_seats(){
+	int choose_seat1[50],choose_seat2[50];
+	char dash;
+	int i,input1=0,input2=1,cheak=0;
+	while(cheak==0){
+		printf("input the seats which you want:");
+		for(i = 0 ; i <= 50; i++){
+			fflush(stdin);							/*clear input buffer*/
+			scanf("%d%c%d",&choose_seat1[i],&dash,&choose_seat2[i]);
+		}for(i = 0 ; i <= 50 ; i++){
+			if(choose_seat1[i]>9||choose_seat1[i]<1||choose_seat2[i]>9||choose_seat2[i]<1||dash!='-'){
+				cheak++;
+				printf("error");
+				break;
+			}else if(seats[choose_seat1[i]-1][choose_seat2[i]-1] != '-'){
+				cheak++;
+				printf("error");
+				break;
+			}
+		}for(i =0 ; cheak==0 && i<=50 ; i++){
+			seats[choose_seat1[i]-1][choose_seat2[i]-1] = '@';
+        	
+		}if(cheak==0){
+			printf("您已選擇的座位：\n");
+        	printSeats();
+        	break;
+		}
+	}
+	
+}
 
 
 int main() {
@@ -196,6 +225,7 @@ int main() {
 				}
                 break;
             case 'c':
+            	self_choose_seats();
                 break;
             case 'd':
             	printf("Continue? (y/n): ");

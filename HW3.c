@@ -111,35 +111,38 @@ void auto_choose_seat(int n){
         }return;
 }
 
-void self_choose_seats(){
-	int choose_seat1[50],choose_seat2[50];
-	char dash;
-	int i,input1=0,input2=1,cheak=0;
-	while(cheak==0){
-		printf("input the seats which you want:");
-		for(i = 0 ; i <= 50; i++){
-			fflush(stdin);							/*clear input buffer*/
-			scanf("%d%c%d",&choose_seat1[i],&dash,&choose_seat2[i]);
-		}for(i = 0 ; i <= 50 ; i++){
-			if(choose_seat1[i]>9||choose_seat1[i]<1||choose_seat2[i]>9||choose_seat2[i]<1||dash!='-'){
-				cheak++;
-				printf("error");
-				break;
-			}else if(seats[choose_seat1[i]-1][choose_seat2[i]-1] != '-'){
-				cheak++;
-				printf("error");
-				break;
-			}
-		}for(i =0 ; cheak==0 && i<=50 ; i++){
-			seats[choose_seat1[i]-1][choose_seat2[i]-1] = '@';
-        	
-		}if(cheak==0){
-			printf("您已選擇的座位：\n");
-        	printSeats();
-        	break;
-		}
-	}
+
+void self_choose_seats(char *inp){
 	
+	while(1){
+		int i=0,num1=0,num2=1,num3=2,num4=3;
+		
+		
+		while(1){
+			if(inp[num1]<='0' || inp[num1]>'9'){
+				i++;
+				return;
+			}if(inp[num2] != '-'){
+				i++;
+				return;
+			}if(inp[num3]<='0' || inp[num3]>'9'){
+				i++;
+				return;
+			}if(inp[num4] != ' '){
+				i++;
+				return;
+			}if(inp[num1]=='\n'||inp[num2]=='\n'||inp[num3]=='\n'||inp[num4]=='\n'){
+				return;
+			}num1+=4;
+			num2+=4;
+			num3+=4;
+			num4+=4;
+		}if(i==0){
+			for(num1=0,num2=1,num3=2,num4=3;inp[num1]=='\n'||inp[num2]=='\n'||inp[num3]=='\n'||inp[num4]=='\n';num1+=4,num2+=4,num3+=4,num4+=4){
+				seats[inp[num1]-'1'][inp[num3]-'1']='@';
+			}printSeats();
+			
+		}
 }
 
 
@@ -225,7 +228,15 @@ int main() {
 				}
                 break;
             case 'c':
-            	self_choose_seats();
+            	
+            	while(1){
+            		char inpu[100];
+            		printf("please input the seats:");
+            		fflush(stdin);							/*clear input buffer*/
+					scanf("%s",inpu);
+            		self_choose_seats(inpu);
+				}
+            	
                 break;
             case 'd':
             	printf("Continue? (y/n): ");

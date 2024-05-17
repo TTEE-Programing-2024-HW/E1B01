@@ -110,39 +110,49 @@ void auto_choose_seat(int n){
 				}        
         }return;
 }
+void self_choose_seats() {
+    char input[100];
+    while (1) {
+        int i = 0,j = 0;
+        printf("Please input the seats and input '0' for the end (for example \"1-2 2-9 0\"): ");
+        fflush(stdin);							/*clear input buffer*/
+        fgets(input, sizeof(input), stdin);  // read the whole line of input
 
+        char *box = strtok(input, " ");
+        while (box != NULL){
+            if (box[0] == '0') {
+                break;
+            } else if (strlen(box) != 3 || box[1] != '-' || box[0] < '1' || box[0] > '9' || box[2] < '1' || box[2] > '9') {
+                i++;
+                
+                printf("wrong input format\n");
+                break;
+            } else {
+                int row = box[0] - '1';
+                int col = box[2] - '1';
+                if (seats[row][col] == '@' || seats[row][col] == '*') {
+                    i++;
+                    printf("Seat [%d,%d] has already been chosen\n", row + 1, col + 1);
+                    break;
+                } else {
+                    seats[row][col] = '@';
+                }
+            }
+            box = strtok(NULL, " ");
+        }
 
-void self_choose_seats(char *inp){
-	
-	while(1){
-		int i=0,num1=0,num2=1,num3=2,num4=3;
-		
-		
-		while(1){
-			if(inp[num1]<='0' || inp[num1]>'9'){
-				i++;
-				return;
-			}if(inp[num2] != '-'){
-				i++;
-				return;
-			}if(inp[num3]<='0' || inp[num3]>'9'){
-				i++;
-				return;
-			}if(inp[num4] != ' '){
-				i++;
-				return;
-			}if(inp[num1]=='\n'||inp[num2]=='\n'||inp[num3]=='\n'||inp[num4]=='\n'){
-				return;
-			}num1+=4;
-			num2+=4;
-			num3+=4;
-			num4+=4;
-		}if(i==0){
-			for(num1=0,num2=1,num3=2,num4=3;inp[num1]=='\n'||inp[num2]=='\n'||inp[num3]=='\n'||inp[num4]=='\n';num1+=4,num2+=4,num3+=4,num4+=4){
-				seats[inp[num1]-'1'][inp[num3]-'1']='@';
-			}printSeats();
-			
-		}
+        if (i == 0) {
+            printSeats();
+            for (i = 0; i < size; i++) {
+                for ( j = 0; j < size; j++) {
+                    if (seats[i][j] == '@') {
+                        seats[i][j] = '*';
+                    }
+                }
+            }
+            return;
+        }
+    }
 }
 
 
@@ -228,15 +238,7 @@ int main() {
 				}
                 break;
             case 'c':
-            	
-            	while(1){
-            		char inpu[100];
-            		printf("please input the seats:");
-            		fflush(stdin);							/*clear input buffer*/
-					scanf("%s",inpu);
-            		self_choose_seats(inpu);
-				}
-            	
+            	self_choose_seats();
                 break;
             case 'd':
             	printf("Continue? (y/n): ");

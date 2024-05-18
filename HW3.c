@@ -108,7 +108,7 @@ void auto_choose_seat(int n){
                     	}
                 	}
 				}        
-        }return;
+        }
 }
 void self_choose_seats() {
     char input[100];

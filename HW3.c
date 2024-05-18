@@ -128,14 +128,12 @@ void self_choose_seats() {
                 printf("wrong input format\n");
                 break;
             } else {
-                int row = box[0] - '1';
-                int col = box[2] - '1';
-                if (seats[row][col] == '@' || seats[row][col] == '*') {      //determine whether seats are repeat
+                if (seats[box[0] - '1'][box[2] - '1'] == '@' || seats[box[0] - '1'][box[2] - '1'] == '*') {      //determine whether seats are repeat
                     i++;
-                    printf("Seat [%d,%d] has already been chosen\n", row + 1, col + 1);
+                    printf("Seat [%d,%d] has already been chosen\n", (box[0] - '1') + 1, (box[2] - '1') + 1);
                     break;
                 } else {
-                    seats[row][col] = '@';
+                    seats[box[0] - '1'][box[2] - '1'] = '@';
                 }
             }
             box = strtok(NULL, " ");        //let box start from the address of previous one and the gap is space

@@ -10,6 +10,8 @@ struct data{
 	int english;
 }student[10];
 
+float average[10];
+
 int exit_system(){
 	printf("Continue? (y/n): ");
     while(1){
@@ -105,6 +107,7 @@ void print_data(int nn){
 	printf("name              id        math     physics     english     average\n");
 	for(i=0 ; i < nn ; i++){
 		avg=(float)(student[i].math+student[i].physics+student[i].english)/3;
+		average[i]=avg;
 		printf("%-10s      %-7s      %2d        %2d         %2d          %.1f\n",student[i].name,student[i].id,student[i].math,student[i].physics,student[i].english,avg);
 	}system("pause");                        /*pause the screen*/
     system("cls");                           /*clear the screen*/

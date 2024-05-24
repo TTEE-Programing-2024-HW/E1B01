@@ -113,6 +113,20 @@ void print_data(int nn){
     system("cls");                           /*clear the screen*/
 }
 
+void print_high_to_low(){
+	float i;
+	int j;
+	printf("name              id        average\n");
+	for(i=100 ; i>=0 ; i-=0.1){
+		for(j=0 ;j<=9 ;j++){
+			if(average[j]==i){
+				printf("%-10s      %-7s      %.1f\n",student[j].name,student[j].id,average[j]);
+			}
+		}
+	}system("pause");                        /*pause the screen*/
+    system("cls");                           /*clear the screen*/
+}
+
 int main() {
 	char PASSWORD[5]="2024";
 //personal picture
@@ -194,7 +208,7 @@ int main() {
 		}else if(strcmp(choice,c)==0){
 		
 		}else if(strcmp(choice,d)==0){
-		
+			print_high_to_low();
 		}else if(strcmp(choice,e)==0){
 			int re;
 			re = exit_system();

@@ -113,15 +113,20 @@ void print_data(int nn){
     system("cls");                           /*clear the screen*/
 }
 
-void print_high_to_low(){
+void print_high_to_low(int nnn){
 	float i;
 	int j;
+	int l=0;
 	printf("name              id        average\n");
 	for(i=100 ; i>=0 ; i-=0.1){
 		for(j=0 ;j<=9 ;j++){
-			if(average[j]==i){
+			if((average[j]-i)>=0 && (average[j]-i)<0.0001){
+				printf("%f\n",average[j]-i);
 				printf("%-10s      %-7s      %.1f\n",student[j].name,student[j].id,average[j]);
+				l++;
 			}
+		}if(l==nnn){
+			break;
 		}
 	}system("pause");                        /*pause the screen*/
     system("cls");                           /*clear the screen*/
@@ -208,7 +213,7 @@ int main() {
 		}else if(strcmp(choice,c)==0){
 		
 		}else if(strcmp(choice,d)==0){
-			print_high_to_low();
+			print_high_to_low(n);
 		}else if(strcmp(choice,e)==0){
 			int re;
 			re = exit_system();

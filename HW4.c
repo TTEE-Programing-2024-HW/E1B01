@@ -8,9 +8,10 @@ struct data{
 	int math;
 	int physics;
 	int english;
+	float average;
 }student[10];
 
-float average[10];
+float average[10],average1[10];
 
 int exit_system(){
 	printf("Continue? (y/n): ");
@@ -107,27 +108,30 @@ void print_data(int nn){
 	printf("name              id        math     physics     english     average\n");
 	for(i=0 ; i < nn ; i++){
 		avg=(float)(student[i].math+student[i].physics+student[i].english)/3;
-		average[i]=avg;
-		printf("%-10s      %-7s      %2d        %2d         %2d          %.1f\n",student[i].name,student[i].id,student[i].math,student[i].physics,student[i].english,avg);
+		student[i].average=avg;
+		printf("%-10s      %-7s      %2d        %2d         %2d          %.1f\n",student[i].name,student[i].id,student[i].math,student[i].physics,student[i].english,student[i].average);
 	}system("pause");                        /*pause the screen*/
     system("cls");                           /*clear the screen*/
 }
 
 void print_high_to_low(int nnn){
-	float i;
-	int j;
-	int l=0;
-	printf("name              id        average\n");
-	for(i=100 ; i>=0 ; i-=0.1){
-		for(j=0 ;j<=9 ;j++){
-			if((average[j]-i)>=0 && (average[j]-i)<0.0001){
-				printf("%f\n",average[j]-i);
-				printf("%-10s      %-7s      %.1f\n",student[j].name,student[j].id,average[j]);
-				l++;
+	int i,j;
+	float avg;
+	struct data box;
+	for(i=0 ; i < nnn ; i++){
+		avg=(float)(student[i].math+student[i].physics+student[i].english)/3;
+		student[i].average=avg;
+	}for(i=0 ; i < nnn-1 ; i++){
+		for(j=0 ; j < (nnn-1)-i ; j++){
+			if(student[j].average < student[j+1].average){
+				box = student[j];
+				student[j] = student[j+1];
+				student[j+1] = box;
 			}
-		}if(l==nnn){
-			break;
 		}
+	}printf("name              id        math     physics     english     average\n");
+	for(i=0 ; i < nnn ; i++){
+		printf("%-10s      %-7s      %2d        %2d         %2d          %.1f\n",student[i].name,student[i].id,student[i].math,student[i].physics,student[i].english,student[i].average);
 	}system("pause");                        /*pause the screen*/
     system("cls");                           /*clear the screen*/
 }

@@ -136,6 +136,22 @@ void print_high_to_low(int nnn){
     system("cls");                           /*clear the screen*/
 }
 
+void search_student(){
+	char search[10];
+	int i,nobody=0;
+	printf("please input the student you want to search:");
+	scanf("%s",search);
+	for(i=0 ; i < 10 ; i++){
+		if(strcmp(student[i].name,search)==0){
+			printf("%-10s      %-7s      %2d        %2d         %2d          %.1f\n",student[i].name,student[i].id,student[i].math,student[i].physics,student[i].english,student[i].average);
+			nobody++;
+		}
+	}if(nobody == 0){
+		printf("name is not exist\n");
+	}system("pause");                        /*pause the screen*/
+    system("cls");                           /*clear the screen*/
+}
+
 int main() {
 	char PASSWORD[5]="2024";
 //personal picture
@@ -205,7 +221,7 @@ int main() {
     			printf("please input n(5~10) which is type of integer:");
     			fflush(stdin);							/*clear input buffer*/
 				scanf("%d",&n);
-				if(n>=2 && n<=10){
+				if(n>=5 && n<=10){
     				input_grade(n);
     				break;
     			}
@@ -215,7 +231,7 @@ int main() {
 			print_data(n);
 		
 		}else if(strcmp(choice,c)==0){
-		
+			search_student();
 		}else if(strcmp(choice,d)==0){
 			print_high_to_low(n);
 		}else if(strcmp(choice,e)==0){
@@ -225,7 +241,7 @@ int main() {
 				return 0;
 			}
 		}else{
-			printf("¿ù»~°T®§\n");
+			printf("error\n");
 			system("pause");                        /*pause the screen*/
     		system("cls");                           /*clear the screen*/
 		}
